@@ -1,0 +1,1230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Masterclass | upGrad Learning Center</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:#080b16;
+    color:#f5f7ff;
+    overflow:hidden;
+}
+.deck{
+    width:100vw;
+    height:100vh;
+    position:relative;
+}
+.slide{
+    display:none;
+    width:100%;
+    height:100%;
+    padding:55px 75px 75px;
+    position:relative;
+    overflow:auto;
+    background:
+      radial-gradient(circle at 85% 10%,rgba(100,80,255,.18),transparent 30%),
+      radial-gradient(circle at 10% 90%,rgba(0,200,180,.10),transparent 25%),
+      #080b16;
+}
+.slide.active{display:block}
+h1{font-size:55px;line-height:1.05;margin:0 0 25px}
+h2{font-size:42px;margin:0 0 28px}
+h3{font-size:27px}
+p,li{font-size:21px;line-height:1.55}
+.subtitle{font-size:24px;color:#b9c0d8}
+.small{font-size:16px;color:#9da6c4}
+.tag{
+    display:inline-block;
+    padding:8px 16px;
+    border-radius:30px;
+    background:#171c31;
+    color:#9fa8ff;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+.grid3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+.card{
+    background:#11162a;
+    border:1px solid #252c48;
+    border-radius:18px;
+    padding:24px;
+}
+.card:hover{border-color:#6570ff}
+.big{
+    font-size:70px;
+    font-weight:800;
+}
+.highlight{color:#8e9bff}
+.green{color:#5ee6c2}
+.yellow{color:#ffd76a}
+.red{color:#ff8585}
+.center{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:70%;
+    text-align:center;
+}
+.timeline{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:55px;
+}
+.timeline div{
+    flex:1;
+    padding:22px 12px;
+    background:#151b31;
+    border-radius:15px;
+    text-align:center;
+}
+.arrow{
+    font-size:32px;
+    color:#7782ff;
+}
+.pill{
+    display:inline-block;
+    padding:10px 15px;
+    border-radius:12px;
+    background:#202744;
+    margin:5px;
+}
+.quiz{
+    margin-top:25px;
+    background:#11172b;
+    border:1px solid #303959;
+    border-radius:20px;
+    padding:25px;
+}
+.option{
+    padding:15px 18px;
+    background:#1a2036;
+    margin:10px 0;
+    border-radius:12px;
+    cursor:pointer;
+    border:1px solid transparent;
+}
+.option:hover{border-color:#7884ff}
+.result{
+    font-weight:bold;
+    margin-top:15px;
+    min-height:28px;
+}
+button{
+    background:#6875ff;
+    border:0;
+    color:white;
+    padding:13px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:16px;
+}
+button:hover{background:#7e89ff}
+input,textarea,select{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #39415e;
+    background:#0c1120;
+    color:white;
+    font-size:17px;
+    margin:8px 0;
+}
+.flow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+    margin:35px 0;
+    flex-wrap:wrap;
+}
+.flowbox{
+    padding:20px;
+    background:#151b31;
+    border:1px solid #353e63;
+    border-radius:15px;
+    min-width:145px;
+    text-align:center;
+}
+.venn{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:35px;
+}
+.circle{
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:rgba(105,120,255,.28);
+    border:2px solid #7480ff;
+    margin:-25px;
+}
+.circle:nth-child(2){
+    background:rgba(60,220,180,.25);
+    border-color:#5ee6c2;
+}
+.progress{
+    position:fixed;
+    bottom:0;
+    left:0;
+    height:5px;
+    background:#6975ff;
+    transition:.3s;
+    z-index:20;
+}
+.nav{
+    position:fixed;
+    bottom:18px;
+    right:25px;
+    z-index:30;
+    display:flex;
+    gap:8px;
+}
+.nav button{
+    width:45px;
+    height:40px;
+    padding:0;
+}
+.counter{
+    position:fixed;
+    bottom:23px;
+    left:30px;
+    z-index:30;
+    color:#929bb8;
+}
+.kpi{
+    font-size:42px;
+    font-weight:bold;
+}
+.bar{
+    height:25px;
+    background:#222944;
+    border-radius:20px;
+    overflow:hidden;
+    margin:12px 0;
+}
+.fill{
+    height:100%;
+    background:#6875ff;
+    width:0;
+    transition:1s;
+}
+.token{
+    display:inline-block;
+    background:#29315a;
+    padding:9px 13px;
+    margin:5px;
+    border-radius:8px;
+}
+.warning{
+    border-left:5px solid #ff7777;
+    background:#21151d;
+    padding:20px;
+    border-radius:10px;
+}
+.safe{
+    border-left:5px solid #5ee6c2;
+    background:#10221f;
+    padding:20px;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="deck">
+
+<!-- 01 -->
+<section class="slide active">
+<div class="center">
+<div>
+<div class="tag">upGrad Learning Center</div>
+<h1>🤖 ARTIFICIAL<br><span class="highlight">INTELLIGENCE</span></h1>
+<p class="subtitle">From ChatGPT to Transformers, RAG & Agentic AI</p>
+<p>AI Masterclass for Commerce & Arts Students</p>
+<p class="small">Romit Bhalla | Data Science Instructor</p>
+</div>
+</div>
+</section>
+
+<!-- 02 -->
+<section class="slide">
+<div class="tag">01 • THE HOOK</div>
+<h2>You have already been using AI.</h2>
+<div class="grid3">
+<div class="card"><div class="big">📱</div><h3>Instagram</h3><p>Which Reel should appear next?</p></div>
+<div class="card"><div class="big">🛒</div><h3>Amazon</h3><p>Which product should be recommended?</p></div>
+<div class="card"><div class="big">🎵</div><h3>Spotify</h3><p>Which song might you like?</p></div>
+<div class="card"><div class="big">🗺️</div><h3>Google Maps</h3><p>Which route is fastest?</p></div>
+<div class="card"><div class="big">💳</div><h3>Banking</h3><p>Is this transaction suspicious?</p></div>
+<div class="card"><div class="big">📸</div><h3>Camera</h3><p>Can the phone identify the scene?</p></div>
+</div>
+<p class="subtitle">The interesting question is not <b>“Do I use AI?”</b><br>
+It is <b>“Where am I using AI without noticing?”</b></p>
+</section>
+
+<!-- 03 -->
+<section class="slide">
+<div class="tag">WARM-UP</div>
+<h2>Quick Poll 🎯</h2>
+<p>Which of these have you used today?</p>
+<div class="grid">
+<div class="card">☐ Google Search</div>
+<div class="card">☐ Instagram / YouTube</div>
+<div class="card">☐ Maps</div>
+<div class="card">☐ Online shopping</div>
+<div class="card">☐ UPI / Banking</div>
+<div class="card">☐ ChatGPT / Gemini</div>
+</div>
+<h3 class="highlight">Almost everyone in this room has interacted with AI today.</h3>
+</section>
+
+<!-- 04 -->
+<section class="slide">
+<div class="tag">WHAT IS AI?</div>
+<h2>AI in one sentence</h2>
+<div class="center">
+<div class="card">
+<div class="big">🧠</div>
+<h2>AI = Machines doing tasks that normally require human intelligence.</h2>
+<p>Examples: recognising faces, understanding language, making predictions, recommending products, detecting fraud.</p>
+</div>
+</div>
+</section>
+
+<!-- 05 -->
+<section class="slide">
+<div class="tag">REAL-WORLD ANALOGY</div>
+<h2>Think of AI like an intern.</h2>
+<div class="grid">
+<div class="card">
+<h3>👨‍💼 Human Intern</h3>
+<ul>
+<li>Receives examples</li>
+<li>Learns patterns</li>
+<li>Gets feedback</li>
+<li>Uses knowledge to make decisions</li>
+</ul>
+</div>
+<div class="card">
+<h3>🤖 AI System</h3>
+<ul>
+<li>Receives data</li>
+<li>Learns patterns</li>
+<li>Gets training signals</li>
+<li>Produces predictions/output</li>
+</ul>
+</div>
+</div>
+<p class="subtitle">AI does not “think” exactly like a human.</p>
+</section>
+
+<!-- 06 -->
+<section class="slide">
+<div class="tag">AI ≠ MAGIC</div>
+<h2>What AI actually does</h2>
+<div class="flow">
+<div class="flowbox">📥 Input<br><small>Data</small></div>
+<div class="arrow">→</div>
+<div class="flowbox">🔎 Patterns<br><small>Learned</small></div>
+<div class="arrow">→</div>
+<div class="flowbox">⚙️ Model<br><small>Calculations</small></div>
+<div class="arrow">→</div>
+<div class="flowbox">📤 Output<br><small>Prediction</small></div>
+</div>
+<div class="card">
+<p><b>Example:</b> Give a fraud detection model thousands of transactions → it learns patterns → new transaction arrives → model predicts “likely fraud” or “likely normal”.</p>
+</div>
+</section>
+
+<!-- 07 -->
+<section class="slide">
+<div class="tag">HISTORY</div>
+<h2>AI didn't appear with ChatGPT.</h2>
+<div class="timeline">
+<div><b>1950</b><br>🧠 Turing<br>Machine Intelligence</div>
+<div><b>1956</b><br>🤖 AI term<br>Coined</div>
+<div><b>1997</b><br>♟️ Deep Blue<br>beats Kasparov</div>
+<div><b>2012</b><br>👁️ Deep Learning<br>Breakthrough</div>
+<div><b>2017</b><br>⚡ Transformer<br>Architecture</div>
+<div><b>2022+</b><br>💬 ChatGPT<br>Generative AI boom</div>
+</div>
+</section>
+
+<!-- 08 -->
+<section class="slide">
+<div class="tag">AI EVOLUTION</div>
+<h2>From rules → learning → generation</h2>
+<div class="flow">
+<div class="flowbox">📜 Rule Based AI<br><small>IF this → THEN that</small></div>
+<div class="arrow">→</div>
+<div class="flowbox">📊 ML<br><small>Learn patterns</small></div>
+<div class="arrow">→</div>
+<div class="flowbox">🧠 Deep Learning<br><small>Neural networks</small></div>
+<div class="arrow">→</div>
+<div class="flowbox">✨ GenAI<br><small>Create content</small></div>
+<div class="arrow">→</div>
+<div class="flowbox">🤖 Agents<br><small>Take actions</small></div>
+</div>
+</section>
+
+<!-- 09 -->
+<section class="slide">
+<div class="tag">THE BIG PICTURE</div>
+<h2>AI is an umbrella ☂️</h2>
+<div class="venn">
+<div class="circle">Artificial<br>Intelligence</div>
+<div class="circle">Machine<br>Learning</div>
+<div class="circle">Deep Learning<br>+ GenAI</div>
+</div>
+<p class="small">Not every AI system is ChatGPT. ChatGPT is only one kind of AI application.</p>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+<div class="tag">AI FAMILY</div>
+<h2>Meet the AI family</h2>
+<div class="grid3">
+<div class="card"><h3>📈 Machine Learning</h3><p>Learn patterns from data.</p><b>Example:</b> Credit risk prediction.</div>
+<div class="card"><h3>👁️ Computer Vision</h3><p>Understand images/video.</p><b>Example:</b> Face unlock.</div>
+<div class="card"><h3>✨ Generative AI</h3><p>Create new content.</p><b>Example:</b> Generate an advertisement.</div>
+<div class="card"><h3>🔍 Explainable AI</h3><p>Explain why a model made a decision.</p><b>Example:</b> Loan rejection explanation.</div>
+<div class="card"><h3>🗣️ Language AI</h3><p>Understand/generate language.</p><b>Example:</b> Chatbots.</div>
+<div class="card"><h3>🤖 Agentic AI</h3><p>Plan + use tools + act.</p><b>Example:</b> AI travel assistant.</div>
+</div>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+<div class="tag">ML</div>
+<h2>Machine Learning = Learning from examples</h2>
+<p>Imagine showing a child hundreds of examples of:</p>
+<div class="grid">
+<div class="card"><h3>🍎 Apple</h3><p>Red, round, fruit, stem...</p></div>
+<div class="card"><h3>🍌 Banana</h3><p>Yellow, curved, fruit...</p></div>
+</div>
+<p>Eventually the child can identify a new fruit.</p>
+<p class="highlight">ML works similarly — but mathematically and at huge scale.</p>
+</section>
+
+<!-- 12 -->
+<section class="slide">
+<div class="tag">COMPUTER VISION</div>
+<h2>AI can “see” 👁️</h2>
+<div class="grid">
+<div class="card"><h3>Face Recognition</h3><p>“Is this person authorised?”</p></div>
+<div class="card"><h3>OCR</h3><p>“What text is inside this image?”</p></div>
+<div class="card"><h3>Medical Imaging</h3><p>“Are there suspicious patterns?”</p></div>
+<div class="card"><h3>Retail</h3><p>“What product is on the shelf?”</p></div>
+</div>
+</section>
+
+<!-- 13 -->
+<section class="slide">
+<div class="tag">EXPLAINABLE AI</div>
+<h2>AI says: “Loan rejected.”</h2>
+<div class="warning">
+<h3>😡 Bad experience</h3>
+<p>“Why?”</p>
+<p>AI: “Because I said so.”</p>
+</div>
+<div class="safe">
+<h3>🙂 Better AI</h3>
+<p>“Your application was affected mainly by high debt-to-income ratio and short credit history.”</p>
+</div>
+<p>Explainable AI tries to make AI decisions understandable.</p>
+</section>
+
+<!-- 14 -->
+<section class="slide">
+<div class="tag">GENERATIVE AI</div>
+<h2>GenAI creates.</h2>
+<div class="grid3">
+<div class="card">✍️ Text</div>
+<div class="card">🎨 Images</div>
+<div class="card">🎵 Music</div>
+<div class="card">🎬 Video</div>
+<div class="card">💻 Code</div>
+<div class="card">📊 Presentations</div>
+</div>
+<h3 class="highlight">Traditional AI often predicts. GenAI can create.</h3>
+</section>
+
+<!-- 15 -->
+<section class="slide">
+<div class="tag">USE CASES</div>
+<h2>Where is AI being used?</h2>
+<div class="grid3">
+<div class="card">🏦 Banking<br><small>Fraud detection</small></div>
+<div class="card">🛍️ Retail<br><small>Recommendations</small></div>
+<div class="card">📣 Marketing<br><small>Personalisation</small></div>
+<div class="card">🎬 Entertainment<br><small>Content recommendation</small></div>
+<div class="card">🚚 Supply Chain<br><small>Demand forecasting</small></div>
+<div class="card">👩‍💼 HR<br><small>Resume screening</small></div>
+</div>
+</section>
+
+<!-- 16 -->
+<section class="slide">
+<div class="tag">THE NEXT QUESTION</div>
+<h2>How does modern AI understand language?</h2>
+<div class="center">
+<div>
+<div class="big">💬</div>
+<h1>LLM</h1>
+<p class="subtitle">Large Language Model</p>
+<p>Think of it as a giant language pattern learner.</p>
+</div>
+</div>
+</section>
+
+<!-- 17 -->
+<section class="slide">
+<div class="tag">LLM</div>
+<h2>What is an LLM?</h2>
+<div class="card">
+<h3>Large</h3>
+<p>Trained using enormous amounts of text/data.</p>
+</div>
+<div class="card">
+<h3>Language</h3>
+<p>Designed to work with human language.</p>
+</div>
+<div class="card">
+<h3>Model</h3>
+<p>A mathematical system that learns patterns.</p>
+</div>
+<h3 class="highlight">LLM ≠ database of sentences.</h3>
+</section>
+
+<!-- 18 -->
+<section class="slide">
+<div class="tag">TOKENIZATION</div>
+<h2>AI doesn't read words exactly like you do.</h2>
+<p>Before an LLM processes text, it converts text into <b>tokens</b>.</p>
+<div class="card">
+<h3>Sentence</h3>
+<p>“I love Indian food.”</p>
+<h3>Possible tokens</h3>
+<span class="token">I</span>
+<span class="token">love</span>
+<span class="token">Indian</span>
+<span class="token">food</span>
+<span class="token">.</span>
+</div>
+<p class="small">Real tokenization can split words into smaller pieces.</p>
+</section>
+
+<!-- 19 -->
+<section class="slide">
+<div class="tag">TOKEN SIMULATOR</div>
+<h2>Try Tokenization 🔬</h2>
+<input id="tokenInput" value="I love data science!">
+<button onclick="tokenize()">Tokenize</button>
+<div id="tokens" class="card" style="margin-top:20px"></div>
+<p class="small">This is a classroom approximation — real tokenizers are more sophisticated.</p>
+</section>
+
+<!-- 20 -->
+<section class="slide">
+<div class="tag">TRANSFORMERS</div>
+<h2>The technology behind modern LLMs</h2>
+<div class="flow">
+<div class="flowbox">Text</div>
+<div class="arrow">→</div>
+<div class="flowbox">Tokens</div>
+<div class="arrow">→</div>
+<div class="flowbox">Embeddings</div>
+<div class="arrow">→</div>
+<div class="flowbox">Transformer</div>
+<div class="arrow">→</div>
+<div class="flowbox">Output</div>
+</div>
+<div class="card">
+<p>The <b>Transformer</b> architecture became hugely important because it is very good at understanding relationships between words/tokens.</p>
+</div>
+</section>
+
+<!-- 21 -->
+<section class="slide">
+<div class="tag">REAL-WORLD ANALOGY</div>
+<h2>Transformer = Group discussion 🗣️</h2>
+<p>Imagine 5 students reading the sentence:</p>
+<div class="card">
+<h2>“Riya deposited money in the bank because <span class="highlight">it</span> was nearby.”</h2>
+</div>
+<p>What does “it” refer to?</p>
+<div class="grid">
+<div class="card">❌ Money?</div>
+<div class="card">✅ Bank?</div>
+</div>
+<p>The model needs to understand relationships between words.</p>
+</section>
+
+<!-- 22 -->
+<section class="slide">
+<div class="tag">SELF-ATTENTION</div>
+<h2>Attention = “What should I focus on?” 👀</h2>
+<div class="card">
+<h3>Sentence:</h3>
+<h2>“The student opened the bank account.”</h2>
+<p>When processing <b>bank</b>, useful context includes:</p>
+<div class="pill">student</div>
+<div class="pill">opened</div>
+<div class="pill">account</div>
+</div>
+<p class="highlight">Self-attention helps the model consider relationships between tokens.</p>
+</section>
+
+<!-- 23 -->
+<section class="slide">
+<div class="tag">SELF-ATTENTION SIMULATOR</div>
+<h2>Which words matter most?</h2>
+<p>Sentence: <b>“The company increased sales because demand was high.”</b></p>
+<select id="attentionWord" onchange="attention()">
+<option value="sales">sales</option>
+<option value="demand">demand</option>
+<option value="company">company</option>
+</select>
+<div id="attentionOutput" class="card" style="margin-top:20px">
+Choose a word.
+</div>
+</section>
+
+<!-- 24 -->
+<section class="slide">
+<div class="tag">GPT</div>
+<h2>What does GPT mean?</h2>
+<div class="grid3">
+<div class="card"><div class="big">G</div><h3>Generative</h3><p>Generates content.</p></div>
+<div class="card"><div class="big">P</div><h3>Pre-trained</h3><p>Learns before you use it.</p></div>
+<div class="card"><div class="big">T</div><h3>Transformer</h3><p>Uses transformer architecture.</p></div>
+</div>
+<h3 class="highlight">GPT is a family of language models.</h3>
+</section>
+
+<!-- 25 -->
+<section class="slide">
+<div class="tag">THE BIG MISCONCEPTION</div>
+<h2>Does ChatGPT “look up” every answer?</h2>
+<div class="card">
+<h2>Usually, no.</h2>
+<p>A language model generates text based on patterns learned during training and the context it receives.</p>
+</div>
+<div class="warning">
+<p>Therefore: fluent ≠ automatically factual.</p>
+</div>
+</section>
+
+<!-- 26 -->
+<section class="slide">
+<div class="tag">UNDER THE HOOD</div>
+<h2>How ChatGPT generates output</h2>
+<div class="flow">
+<div class="flowbox">👤 Prompt</div>
+<div class="arrow">→</div>
+<div class="flowbox">🔤 Tokens</div>
+<div class="arrow">→</div>
+<div class="flowbox">🧠 Transformer</div>
+<div class="arrow">→</div>
+<div class="flowbox">🎯 Probabilities</div>
+<div class="arrow">→</div>
+<div class="flowbox">📝 Next token</div>
+</div>
+<p>Then it repeats the process — token after token — until the answer is complete.</p>
+</section>
+
+<!-- 27 -->
+<section class="slide">
+<div class="tag">NEXT TOKEN</div>
+<h2>Imagine the model sees:</h2>
+<div class="card">
+<h1>“The capital of India is…”</h1>
+</div>
+<div class="grid3">
+<div class="card"><h3>Delhi</h3><div class="bar"><div class="fill" style="width:92%"></div></div></div>
+<div class="card"><h3>Mumbai</h3><div class="bar"><div class="fill" style="width:3%"></div></div></div>
+<div class="card"><h3>Chennai</h3><div class="bar"><div class="fill" style="width:1%"></div></div></div>
+</div>
+<p class="small">Illustrative probabilities only — not actual ChatGPT probabilities.</p>
+</section>
+
+<!-- 28 -->
+<section class="slide">
+<div class="tag">QUIZ</div>
+<h2>What happens next?</h2>
+<div class="quiz">
+<p><b>ChatGPT sees:</b> “The largest planet in our solar system is…”</p>
+<div class="option" onclick="quiz(this,false)">A. Delhi</div>
+<div class="option" onclick="quiz(this,true)">B. Jupiter</div>
+<div class="option" onclick="quiz(this,false)">C. Amazon</div>
+<div class="option" onclick="quiz(this,false)">D. Shakespeare</div>
+<div class="result"></div>
+</div>
+</section>
+
+<!-- 29 -->
+<section class="slide">
+<div class="tag">PROMPTS</div>
+<h2>So what is a Prompt?</h2>
+<div class="card">
+<h1>Prompt = Instruction / input given to an AI.</h1>
+<p>Example:</p>
+<p>“Explain inflation in simple language with an example of a ₹100 product.”</p>
+</div>
+<p>Think of a prompt as the <b>brief you give to an intern.</b></p>
+</section>
+
+<!-- 30 -->
+<section class="slide">
+<div class="tag">PROMPT ENGINEERING</div>
+<h2>Bad prompt vs Better prompt</h2>
+<div class="grid">
+<div class="warning">
+<h3>❌ Weak</h3>
+<p>“Explain marketing.”</p>
+</div>
+<div class="safe">
+<h3>✅ Better</h3>
+<p>“You are a marketing professor. Explain digital marketing to a first-year commerce student using a Zomato example in under 200 words.”</p>
+</div>
+</div>
+</section>
+
+<!-- 31 -->
+<section class="slide">
+<div class="tag">PROMPT FORMULA</div>
+<h2>A simple prompt formula</h2>
+<div class="flow">
+<div class="flowbox">🎭 Role</div>
+<div class="arrow">+</div>
+<div class="flowbox">🎯 Task</div>
+<div class="arrow">+</div>
+<div class="flowbox">📚 Context</div>
+<div class="arrow">+</div>
+<div class="flowbox">📐 Format</div>
+<div class="arrow">+</div>
+<div class="flowbox">🚧 Constraints</div>
+</div>
+<div class="card">
+<p><b>Example:</b> “Act as a business analyst. Analyse this sales table. Identify the top 3 products. Give the result as a simple table and mention one business recommendation.”</p>
+</div>
+</section>
+
+<!-- 32 -->
+<section class="slide">
+<div class="tag">PROMPT BUILDER</div>
+<h2>Build your own prompt</h2>
+<input id="role" placeholder="Role: e.g. Marketing Analyst">
+<input id="task" placeholder="Task: e.g. Analyse sales">
+<input id="context" placeholder="Context: e.g. college clothing store">
+<input id="format" placeholder="Format: e.g. table">
+<button onclick="buildPrompt()">Build Prompt</button>
+<div id="promptResult" class="card" style="margin-top:20px"></div>
+</section>
+
+<!-- 33 -->
+<section class="slide">
+<div class="tag">PROMPTING</div>
+<h2>Zero-shot vs Few-shot</h2>
+<div class="grid">
+<div class="card">
+<h3>Zero-shot</h3>
+<p>Ask without examples.</p>
+<p>“Classify this review as positive or negative.”</p>
+</div>
+<div class="card">
+<h3>Few-shot</h3>
+<p>Give examples first.</p>
+<p>“Amazing → Positive<br>Terrible → Negative<br>Average → ?”</p>
+</div>
+</div>
+</section>
+
+<!-- 34 -->
+<section class="slide">
+<div class="tag">RAG</div>
+<h2>What if AI doesn't know your information?</h2>
+<div class="card">
+<h2>RAG = Retrieval-Augmented Generation</h2>
+<p>Instead of asking the model to rely only on its learned knowledge, we first retrieve relevant information and provide it as context.</p>
+</div>
+</section>
+
+<!-- 35 -->
+<section class="slide">
+<div class="tag">RAG ANALOGY</div>
+<h2>RAG = Open-book exam 📖</h2>
+<div class="grid">
+<div class="card">
+<h3>Normal LLM</h3>
+<p>“Answer using what you already know.”</p>
+</div>
+<div class="card">
+<h3>RAG</h3>
+<p>“First search these documents. Then answer using the relevant information.”</p>
+</div>
+</div>
+<p class="highlight">This is extremely useful for company documents, policies, reports and knowledge bases.</p>
+</section>
+
+<!-- 36 -->
+<section class="slide">
+<div class="tag">RAG FLOW</div>
+<h2>How RAG works</h2>
+<div class="flow">
+<div class="flowbox">👤 Question</div>
+<div class="arrow">→</div>
+<div class="flowbox">🔎 Retrieve<br>documents</div>
+<div class="arrow">→</div>
+<div class="flowbox">📚 Relevant<br>context</div>
+<div class="arrow">→</div>
+<div class="flowbox">🧠 LLM</div>
+<div class="arrow">→</div>
+<div class="flowbox">💬 Answer</div>
+</div>
+</section>
+
+<!-- 37 -->
+<section class="slide">
+<div class="tag">RAG EXAMPLE</div>
+<h2>College Helpdesk Bot 🎓</h2>
+<div class="card">
+<p><b>Student:</b> “What is the attendance requirement?”</p>
+<p><b>RAG:</b> Searches college handbook → finds attendance policy → gives answer.</p>
+</div>
+<div class="safe">
+<p>Better than asking a general AI model to guess the college policy.</p>
+</div>
+</section>
+
+<!-- 38 -->
+<section class="slide">
+<div class="tag">LANGCHAIN</div>
+<h2>Where does LangChain fit?</h2>
+<p>Imagine you want to build an AI application.</p>
+<div class="flow">
+<div class="flowbox">User</div>
+<div class="arrow">→</div>
+<div class="flowbox">Prompt</div>
+<div class="arrow">→</div>
+<div class="flowbox">Retriever</div>
+<div class="arrow">→</div>
+<div class="flowbox">LLM</div>
+<div class="arrow">→</div>
+<div class="flowbox">Tools</div>
+</div>
+<p><b>LangChain</b> is a framework/ecosystem that helps developers connect models, prompts, retrieval, tools and application logic.</p>
+</section>
+
+<!-- 39 -->
+<section class="slide">
+<div class="tag">ANALOGY</div>
+<h2>LangChain = Restaurant Kitchen Manager 👨‍🍳</h2>
+<div class="grid3">
+<div class="card">👤 Customer<br>Request</div>
+<div class="card">📋 Order<br>Instructions</div>
+<div class="card">🥕 Ingredients<br>Data</div>
+<div class="card">👨‍🍳 LLM<br>Chef</div>
+<div class="card">🔧 Tools<br>Kitchen</div>
+<div class="card">🍽️ Final<br>Answer</div>
+</div>
+<p>LangChain can help coordinate the pieces.</p>
+</section>
+
+<!-- 40 -->
+<section class="slide">
+<div class="tag">AGENTIC AI</div>
+<h2>Chatbot vs AI Agent</h2>
+<div class="grid">
+<div class="card">
+<h3>💬 Chatbot</h3>
+<p>You ask → it responds.</p>
+<p>Mostly conversation.</p>
+</div>
+<div class="card">
+<h3>🤖 Agent</h3>
+<p>You give a goal → it can plan, use tools, inspect results and take actions.</p>
+</div>
+</div>
+</section>
+
+<!-- 41 -->
+<section class="slide">
+<div class="tag">AGENT EXAMPLE</div>
+<h2>Travel AI Agent ✈️</h2>
+<div class="flow">
+<div class="flowbox">“Plan my trip.”</div>
+<div class="arrow">→</div>
+<div class="flowbox">Plan</div>
+<div class="arrow">→</div>
+<div class="flowbox">Search flights</div>
+<div class="arrow">→</div>
+<div class="flowbox">Check hotels</div>
+<div class="arrow">→</div>
+<div class="flowbox">Prepare itinerary</div>
+</div>
+<p>It is moving from <b>answering</b> toward <b>doing</b>.</p>
+</section>
+
+<!-- 42 -->
+<section class="slide">
+<div class="tag">QUIZ</div>
+<h2>Which is more “agentic”?</h2>
+<div class="quiz">
+<div class="option" onclick="quiz(this,false)">A. Explain what a flight ticket is.</div>
+<div class="option" onclick="quiz(this,true)">B. Search flights, compare options, prepare a shortlist and ask me to confirm.</div>
+<div class="option" onclick="quiz(this,false)">C. Translate my travel plan.</div>
+<div class="result"></div>
+</div>
+</section>
+
+<!-- 43 -->
+<section class="slide">
+<div class="tag">AI SECURITY</div>
+<h2>How secure is AI?</h2>
+<div class="card">
+<h2>AI is a tool. Security depends on:</h2>
+<div class="grid3">
+<div>🔐 Platform</div>
+<div>👤 User behaviour</div>
+<div>🏢 Organisation policy</div>
+<div>🗂️ Data sensitivity</div>
+<div>⚙️ Configuration</div>
+<div>🌐 External systems</div>
+</div>
+</div>
+</section>
+
+<!-- 44 -->
+<section class="slide">
+<div class="tag">PRIVACY</div>
+<h2>Before you paste data into AI...</h2>
+<div class="warning">
+<h3>STOP 🛑</h3>
+<p>Ask: “Would I be comfortable if this information became public?”</p>
+</div>
+<p>Always understand the privacy, retention and enterprise policies of the AI tool you are using.</p>
+</section>
+
+<!-- 45 -->
+<section class="slide">
+<div class="tag">WHAT NOT TO SHARE</div>
+<h2>🚫 Never casually paste sensitive information</h2>
+<div class="grid3">
+<div class="card">🔑 Passwords</div>
+<div class="card">💳 Card / banking details</div>
+<div class="card">🪪 Government IDs</div>
+<div class="card">🔐 API keys</div>
+<div class="card">👤 Private personal data</div>
+<div class="card">🏢 Confidential company data</div>
+</div>
+</section>
+
+<!-- 46 -->
+<section class="slide">
+<div class="tag">DATA PRIVACY</div>
+<h2>Use the “Data Classification” test</h2>
+<div class="flow">
+<div class="flowbox">🟢 Public<br><small>Safe to share</small></div>
+<div class="flowbox">🟡 Internal<br><small>Check policy</small></div>
+<div class="flowbox">🟠 Confidential<br><small>Be careful</small></div>
+<div class="flowbox">🔴 Highly Sensitive<br><small>Don't paste</small></div>
+</div>
+<p>When in doubt: <b>ask your organisation/teacher before sharing.</b></p>
+</section>
+
+<!-- 47 -->
+<section class="slide">
+<div class="tag">AI LIMITATIONS</div>
+<h2>AI can sound confident and still be wrong.</h2>
+<div class="card">
+<h3>Hallucination</h3>
+<p>AI generates an answer that sounds plausible but is incorrect, unsupported or invented.</p>
+</div>
+<div class="grid">
+<div class="card">❌ Blindly trust</div>
+<div class="card">✅ Verify important information</div>
+</div>
+</section>
+
+<!-- 48 -->
+<section class="slide">
+<div class="tag">CRITICAL THINKING</div>
+<h2>AI should be your co-pilot, not your brain.</h2>
+<div class="flow">
+<div class="flowbox">AI generates</div>
+<div class="arrow">→</div>
+<div class="flowbox">You inspect</div>
+<div class="arrow">→</div>
+<div class="flowbox">You verify</div>
+<div class="arrow">→</div>
+<div class="flowbox">You decide</div>
+</div>
+<h2 class="highlight">Human-in-the-loop 🤝</h2>
+</section>
+
+<!-- 49 -->
+<section class="slide">
+<div class="tag">YOU ALREADY USE AI</div>
+<h2>AI hiding in your daily life</h2>
+<div class="grid3">
+<div class="card">📱 Keyboard<br>Next-word suggestions</div>
+<div class="card">📷 Camera<br>Scene optimisation</div>
+<div class="card">🎵 Music<br>Recommendations</div>
+<div class="card">📺 OTT<br>Recommendations</div>
+<div class="card">🛍️ Shopping<br>Personalisation</div>
+<div class="card">🏦 Banking<br>Fraud detection</div>
+</div>
+</section>
+
+<!-- 50 -->
+<section class="slide">
+<div class="tag">COMMERCE + AI</div>
+<h2>How can Commerce students use AI?</h2>
+<div class="grid3">
+<div class="card">📊 Data Analysis</div>
+<div class="card">📣 Marketing</div>
+<div class="card">💰 Finance</div>
+<div class="card">🛒 Sales</div>
+<div class="card">👥 HR</div>
+<div class="card">🚚 Supply Chain</div>
+</div>
+</section>
+
+<!-- 51 -->
+<section class="slide">
+<div class="tag">COMMERCE USE CASE</div>
+<h2>Marketing Analyst + AI</h2>
+<div class="card">
+<p>Imagine a café has 5,000 customer reviews.</p>
+</div>
+<div class="flow">
+<div class="flowbox">Customer Reviews</div>
+<div class="arrow">→</div>
+<div class="flowbox">AI sentiment</div>
+<div class="arrow">→</div>
+<div class="flowbox">Find complaints</div>
+<div class="arrow">→</div>
+<div class="flowbox">Business action</div>
+</div>
+<p><b>Insight:</b> “Customers love taste but complain about waiting time.”</p>
+</section>
+
+<!-- 52 -->
+<section class="slide">
+<div class="tag">COMMERCE USE CASE</div>
+<h2>Finance + AI 💰</h2>
+<div class="grid">
+<div class="card">
+<h3>AI can help with</h3>
+<ul>
+<li>Summarising annual reports</li>
+<li>Comparing financial metrics</li>
+<li>Explaining financial concepts</li>
+<li>Finding trends</li>
+</ul>
+</div>
+<div class="card">
+<h3>But...</h3>
+<ul>
+<li>Verify numbers</li>
+<li>Don't blindly trust recommendations</li>
+<li>Protect financial information</li>
+<li>Human judgement remains important</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- 53 -->
+<section class="slide">
+<div class="tag">ARTS + AI</div>
+<h2>Arts students can use AI too 🎨</h2>
+<div class="grid3">
+<div class="card">✍️ Writing assistance</div>
+<div class="card">🎨 Creative ideation</div>
+<div class="card">📚 Research assistance</div>
+<div class="card">🎬 Storyboarding</div>
+<div class="card">📣 Campaign ideas</div>
+<div class="card">🗣️ Presentation preparation</div>
+</div>
+<p class="highlight">AI doesn't replace creativity. It can accelerate the first draft.</p>
+</section>
+
+<!-- 54 -->
+<section class="slide">
+<div class="tag">FINAL CHALLENGE</div>
+<h2>🚀 Build an AI-powered business idea</h2>
+<div class="card">
+<h3>Your challenge:</h3>
+<p>Choose any business:</p>
+<div class="pill">Café</div>
+<div class="pill">Clothing Store</div>
+<div class="pill">College</div>
+<div class="pill">Gym</div>
+<div class="pill">Travel Agency</div>
+<div class="pill">Instagram Brand</div>
+<p>Now identify:</p>
+<ol>
+<li>One problem</li>
+<li>What data is available?</li>
+<li>Where can AI help?</li>
+<li>What should humans still decide?</li>
+<li>What privacy risks exist?</li>
+</ol>
+</div>
+</section>
+
+<!-- 55 -->
+<section class="slide">
+<div class="tag">FINAL QUIZ</div>
+<h2>🎯 AI Masterclass Challenge</h2>
+
+<div class="quiz">
+<p><b>1. What is the best description of AI?</b></p>
+<div class="option" onclick="quiz(this,true)">A. Machines performing tasks requiring human-like intelligence</div>
+<div class="option" onclick="quiz(this,false)">B. Only ChatGPT</div>
+<div class="option" onclick="quiz(this,false)">C. Robots only</div>
+<div class="result"></div>
+</div>
+
+<div class="quiz">
+<p><b>2. What does GPT stand for?</b></p>
+<div class="option" onclick="quiz(this,false)">A. General Processing Technology</div>
+<div class="option" onclick="quiz(this,true)">B. Generative Pre-trained Transformer</div>
+<div class="option" onclick="quiz(this,false)">C. Generated Prediction Tool</div>
+<div class="result"></div>
+</div>
+
+<div class="quiz">
+<p><b>3. What does RAG do?</b></p>
+<div class="option" onclick="quiz(this,true)">A. Retrieves relevant information and gives it to the model as context</div>
+<div class="option" onclick="quiz(this,false)">B. Makes the internet faster</div>
+<div class="option" onclick="quiz(this,false)">C. Encrypts every AI conversation</div>
+<div class="result"></div>
+</div>
+</section>
+
+<!-- 56 -->
+<section class="slide">
+<div class="center">
+<div>
+<div class="tag">THE TAKEAWAY</div>
+<h1>Don't just <span class="highlight">USE AI.</span></h1>
+<h1>Learn to <span class="green">THINK WITH AI.</span></h1>
+<p class="subtitle">Ask better questions. Verify answers. Protect your data. Add human judgement.</p>
+<h2>🤝 Human + AI > Human or AI</h2>
+<p class="small">Romit Bhalla | Data Science Instructor | upGrad Learning Center</p>
+</div>
+</div>
+</section>
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
+
+<div class="nav">
+<button onclick="prev()">◀</button>
+<button onclick="next()">▶</button>
+</div>
+
+</div>
+
+<script>
+let current=0;
+const slides=document.querySelectorAll('.slide');
+
+function show(n){
+    if(n<0)n=0;
+    if(n>=slides.length)n=slides.length-1;
+    slides[current].classList.remove('active');
+    current=n;
+    slides[current].classList.add('active');
+    document.getElementById('counter').innerText=(current+1)+" / "+slides.length;
+    document.getElementById('progress').style.width=((current+1)/slides.length*100)+"%";
+}
+function next(){show(current+1)}
+function prev(){show(current-1)}
+
+document.addEventListener('keydown',e=>{
+    if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();next()}
+    if(e.key==="ArrowLeft")prev();
+});
+
+function quiz(el,correct){
+    const parent=el.parentElement;
+    const result=parent.querySelector('.result');
+    if(correct){
+        result.innerHTML="✅ Correct! Great job.";
+        result.style.color="#5ee6c2";
+        el.style.borderColor="#5ee6c2";
+    }else{
+        result.innerHTML="❌ Not quite. Think again!";
+        result.style.color="#ff8585";
+        el.style.borderColor="#ff8585";
+    }
+}
+
+function tokenize(){
+    const text=document.getElementById('tokenInput').value.trim();
+    const words=text.match(/\w+|[^\w\s]/g)||[];
+    document.getElementById('tokens').innerHTML=
+        words.map(x=>`<span class="token">${x}</span>`).join('');
+}
+
+function attention(){
+    const word=document.getElementById('attentionWord').value;
+    let output="";
+    if(word==="sales"){
+        output="🎯 Strong attention: <b>increased</b>, <b>demand</b>, <b>company</b>";
+    }
+    if(word==="demand"){
+        output="🎯 Strong attention: <b>because</b>, <b>sales</b>, <b>high</b>";
+    }
+    if(word==="company"){
+        output="🎯 Strong attention: <b>increased</b>, <b>sales</b>";
+    }
+    document.getElementById('attentionOutput').innerHTML=output;
+}
+
+function buildPrompt(){
+    const role=document.getElementById('role').value;
+    const task=document.getElementById('task').value;
+    const context=document.getElementById('context').value;
+    const format=document.getElementById('format').value;
+
+    document.getElementById('promptResult').innerHTML=
+    `<h3>Your Prompt</h3>
+    You are a <b>${role||"business analyst"}</b>.<br>
+    Your task is to <b>${task||"analyse the problem"}</b>.<br>
+    Context: <b>${context||"a business scenario"}</b>.<br>
+    Present the result as a <b>${format||"clear structured answer"}</b>.`;
+}
+
+show(0);
+</script>
+
+</body>
+</html>
